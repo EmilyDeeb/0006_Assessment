@@ -7762,6 +7762,8 @@ a.anchor-link {
 </li>
 <li><p><a href="#Results-and-discussion">Results and discussion</a></p>
 </li>
+<li><p><a href="#Limitations">Limitations</a></p>
+</li>
 <li><p><a href="#Conclusion">Conclusion</a></p>
 </li>
 <li><p><a href="#References">References</a></p>
@@ -8096,7 +8098,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><strong>Dataset 02: Ward Spatial Boundary and population</strong> as shown in Table 2
+<p><strong>Dataset 02: Ward Spatial Boundary and population</strong> To normalise crime counts by ward area and filter the analysis to Greater London,ward boundary polygons and population estimates were obtained from the ONS Open Geography Portal, as shown in Table 2.
 <strong>Table 2:</strong> Spatial and demographic data sources</p>
 <table>
 <thead>
@@ -10308,18 +10310,7 @@ POI density features: 17
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Analytical-Framework:"><strong>Analytical Framework:</strong><a class="anchor-link" href="#Analytical-Framework:">¶</a></h3><p>The methodology is structured as a progression of analytical layers. We begin with Multiple Linear Regression (MLR), which assumes the simplest possible relationship between POI density and crime; a straight line that assumes each amenity type contributes independently and additively. K-Nearest Neighbors then asks whether wards with similar amenity profiles experience similar crime levels. Lastly, Random Forest removes all these assumptions, building hundreds of decision trees across random subsets of the data to capture the complex, non-linear interactions between amenity types that the previous two methods cannot. Having established what the model predicts, SHAP values further evaluate it by decomposing each prediction into the individual contributions of each amenity type, showing not just which features matter, but also how much and in which direction.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Pre-Modelling-Diagnostics:"><strong>Pre-Modelling Diagnostics:</strong><a class="anchor-link" href="#Pre-Modelling-Diagnostics:">¶</a></h3><p>Before fitting any model, three diagnostic checks were conducted to assess feature behaviour and justify model selection. Figures 4, 5, and 6 show the results.</p>
+<h3 id="Pre-Modelling-Diagnostics:"><strong>Pre-Modelling Diagnostics:</strong><a class="anchor-link" href="#Pre-Modelling-Diagnostics:">¶</a></h3><p>Three diagnostic checks were conducted before modelling: POI-crime correlations (Figure 4), feature multicollinearity (Figure 5), and linearity checks (Figure 6). Results confirmed strong associations, significant multicollinearity among food and beverage features, and non-linear relationships for several predictors — motivating the method sequence below.</p>
 </div>
 </div>
 </div>
@@ -10648,6 +10639,41 @@ Name: typeB_density, dtype: float64
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [98]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span> <span class="k">as</span> <span class="n">PILImage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">BytesIO</span>
+
+<span class="c1"># Load diagram from GitHub (raw URL)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"https://raw.githubusercontent.com/EmilyDeeb/0006_Assessment/main/Diagram.png"</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">PILImage</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">700</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<img alt="No description has been provided for this image" src="https://raw.githubusercontent.com/EmilyDeeb/0006_Assessment/main/Diagram.png" width="700">
+</img></div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -10655,28 +10681,18 @@ Name: typeB_density, dtype: float64
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The dataset was split 80/20 into training (543 wards) and test (136 wards) sets using a fixed random seed (42) for reproducibility. To confirm that test-set performance is not sensitive to the particular train-test partition, 5-fold cross-validation was applied to the full dataset using the same hyperparameters.</p>
+<p>The dataset was split 80/20 into training (543 wards) and test (136 wards) sets using a fixed random seed (42) for reproducibility. 5-fold cross-validation on the full dataset confirmed results are not sensitive to the particular split.</p>
 <ol>
-<li><p><strong>MLR</strong> — Features were standardised to enable direct coefficient comparison. Included as an interpretable baseline despite known limitations — multicollinearity and non-linearity confirmed in Figures 5 and 6. Sign reversals on café and restaurant coefficients are multicollinearity artefacts, not errors (Figure 7).</p>
+<li><p><strong>MLR</strong> — A linear baseline. Each POI type is assumed to contribute independently and additively to crime density — useful for benchmarking, but multicollinearity and non-linearity confirmed in Figures 5 and 6 mean these assumptions do not hold here.</p>
 </li>
-<li><p><strong>KNN</strong> — Tests whether wards with similar amenity profiles experience similar crime levels, making no assumptions about functional form. k=4 was selected via 5-fold cross-validation averaged across both targets (Figure 9).</p>
+<li><p><strong>KNN</strong> — Tests whether wards with similar amenity profiles experience similar crime levels, with no assumptions about functional form. k=4 selected via 5-fold CV across both targets (Figure 9).</p>
 </li>
-<li><p><strong>RF</strong> — Removes linearity and independence assumptions entirely, capturing non-linear interactions between amenity types. Selected as the primary model on the basis of pre-modelling diagnostics. Hyperparameters tuned via grid search: n_estimators=300, max_depth=10, min_samples_leaf=4 (CV R²=0.683).</p>
+<li><p><strong>RF</strong> — Primary model. Chosen because MLR assumptions are violated and KNN cannot capture interactions between amenity types. Hyperparameters tuned via grid search: n_estimators=300, max_depth=10, min_samples_leaf=4 (CV R²=0.683).</p>
 </li>
-<li><p><strong>SHAP</strong> — Decomposes each ward-level RF prediction into individual feature contributions, enabling direct comparison of which amenity types drive each crime category and in which direction.</p>
+<li><p><strong>SHAP</strong> — RF predictions are accurate but opaque. SHAP opens the model, decomposing each ward-level prediction into individual feature contributions — showing which amenity types drive each crime category, by how much, and in which direction.</p>
 </li>
 </ol>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Figures 7 and 8 show the standardised MLR coefficients for Type A and Type B, respectively, illustrating the multicollinearity artefacts discussed above.</p>
+<p>Figures 7 and 8 show the standardised MLR coefficients for Type A and Type B, illustrating the multicollinearity artefacts discussed above.</p>
 </div>
 </div>
 </div>
@@ -11013,7 +11029,7 @@ KNN Summary (k=4):
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Model-performance"><strong>Model performance</strong><a class="anchor-link" href="#Model-performance">¶</a></h4><p>As shown in Table 7, Random Forest outperformed both baseline methods across all targets and metrics. The consistent gap between RF and MLR indicates that the POI-crime relationship is non-linear, with amenity types interacting in ways that additive linear models cannot fully capture. The underperformance of KNN suggests that wards with similar POI profiles do not always exhibit similar crime levels, pointing to spatial heterogeneity in crime determinants across London’s diverse ward typologies.</p>
+<h4 id="Model-performance"><strong>Model performance</strong><a class="anchor-link" href="#Model-performance">¶</a></h4><p>As shown in Table 7, Random Forest outperformed both baseline methods across all targets and metrics. The consistent gap between RF and MLR indicates that the POI-crime relationship is non-linear, with amenity types interacting in ways that additive linear models cannot fully capture. The underperformance of KNN suggests that wards with similar POI profiles do not always exhibit similar crime levels, pointing to spatial heterogeneity in crime determinants across London's diverse ward typologies.</p>
 <p>Property crime (Type B) was predicted more accurately than Type A across all three methods, consistent with property crime being more directly opportunity-driven and therefore more strongly determined by the physical configuration of targets.</p>
 </div>
 </div>
@@ -11440,9 +11456,8 @@ Type B — Property
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Crime-generators-by-type"><strong>Crime generators by type</strong><a class="anchor-link" href="#Crime-generators-by-type">¶</a></h4><p>Having established that RF best captures the POI-crime relationship, SHAP values allow us to open the model and ask which amenity types are doing the work — and whether the answer differs by crime type.</p>
-<p>Figures 11 and 12 show the SHAP beeswarm plots for Type A and Type B, respectively.</p>
-<p>SHAP analysis demonstrates that different amenity categories are primary drivers for each crime type. For Type A (person/society crime), convenience store density is the dominant predictor (maximum SHAP value: 0.75), followed by fast food and ATM density. Notably, traditional night-time economy venues; bars, pubs, and nightclubs, were among the weakest predictors despite their prominent role in criminological discourse. This may reflect the mandatory guardianship associated with licensed premises; door staff, CCTV, and licensing conditions, which suppresses crime opportunity despite high footfall, consistent with the capable guardians component of Routine Activity Theory (Cohen and Felson, 1979).</p>
+<h4 id="Crime-generators-by-type"><strong>Crime generators by type</strong><a class="anchor-link" href="#Crime-generators-by-type">¶</a></h4><p>Figures 11 and 12 show the SHAP beeswarm plots for Type A and Type B respectively.</p>
+<p>For Type A (person/society crime), convenience store density is the dominant predictor (maximum SHAP value: 0.75), followed by fast food and ATM density. Traditional night-time economy venues — bars, pubs, and nightclubs — were among the weakest predictors despite their prominent role in criminological discourse. This likely reflects the mandatory guardianship of licensed premises — door staff, CCTV, and licensing conditions — which suppresses crime opportunity despite high footfall, consistent with Routine Activity Theory (Cohen and Felson, 1979).</p>
 </div>
 </div>
 </div>
@@ -11522,7 +11537,7 @@ Type B — Property
 <p><strong>Figure 11:</strong> SHAP Feature Contributions — Type A Person and Society Crime
 <em>SHAP beeswarm plot for the Random Forest model predicting Type A crime density. Each point represents one ward; colour indicates feature value (red = high, blue = low). Convenience store density is the dominant predictor — high-density wards push predictions strongly positive, while low-density wards extend far left. Fast food and supermarket follow. Night-time economy venues (bars, nightclubs) cluster near zero, confirming their weak predictive contribution.</em></p>
 <blockquote>
-<p>For Type B (property crime), café density was the primary predictor (maximum SHAP value: 1.25), followed by convenience stores and restaurants. The shift from fast food (Type A) to café (Type B) as the dominant predictor suggests that functionally distinct spatial profiles underlie each crime category. Fast food outlets cluster in high-footfall deprived areas where violence concentrates, while cafés cluster in daytime commercial zones where theft and shoplifting are more prevalent.</p>
+<p>For Type B (property crime), café density was the primary predictor (maximum SHAP value: 1.25), followed by convenience stores and restaurants. The shift from fast food (Type A) to café (Type B) as the dominant predictor reflects functionally distinct spatial profiles: fast food outlets cluster in high-footfall deprived areas where violence concentrates, while cafés cluster in daytime commercial zones where theft and shoplifting are more prevalent. Taken together, the SHAP findings show that POI type — not just density — determines which crime category an area generates.</p>
 </blockquote>
 <p><strong>Figure 12:</strong> SHAP Feature Contributions — Type B Property Crime
 <em>SHAP beeswarm plot for Type B property crime. Convenience store remains the top predictor, but café rises to second — consistent with its status as the strongest Pearson correlate of property crime (r=0.84). Café shows a pronounced negative tail, indicating low-café wards are actively suppressed in predicted property crime density. Supermarket and fast food follow.</em></p>
@@ -11536,8 +11551,8 @@ Type B — Property
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Spatial-diagnostics"><strong>Spatial diagnostics</strong><a class="anchor-link" href="#Spatial-diagnostics">¶</a></h4><p>Spatial residuals reveal systematic geographic patterns in model error. Underpredicted wards — where actual crime exceeds model estimates — concentrate in outer east London (Barking and Dagenham, Redbridge) and deprived west London (Brent, Greenwich, Enfield), suggesting socioeconomic deprivation drives crime independently of physical land use. Kensington and Chelsea is a notable exception among underpredicted boroughs — here, underprediction likely reflects high-value tourist targets and opportunity-rich commercial zones rather than deprivation. Overpredicted wards cluster in affluent outer south-west London, where high amenity density does not correspond to elevated crime — likely reflecting the crime-suppressing effects of high property values and private security.</p>
-<p>Figures 13 and 14 show the actual vs predicted scatter and spatial residual map for Type A crime.</p>
+<h4 id="Spatial-diagnostics"><strong>Spatial diagnostics</strong><a class="anchor-link" href="#Spatial-diagnostics">¶</a></h4><p>Figures 13 and 14 show the actual vs predicted scatter and spatial residual map for Type A crime. Underpredicted wards — where actual crime exceeds model estimates — concentrate in outer east London (Barking and Dagenham, Redbridge) and deprived west London (Brent, Greenwich, Enfield), suggesting socioeconomic deprivation drives crime independently of physical land use. Kensington and Chelsea is a notable exception — underprediction here likely reflects high-value tourist targets rather than deprivation. Overpredicted wards cluster in affluent outer south-west London, where high amenity density does not correspond to elevated crime.</p>
+<p>Where SHAP shows what POI density captures, the residuals reveal what it cannot — the social conditions that generate crime independently of physical land use.</p>
 </div>
 </div>
 </div>
@@ -11978,18 +11993,8 @@ Type B — Property
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Limitations"><strong>Limitations</strong><a class="anchor-link" href="#Limitations">¶</a></h2><ol>
-<li><p><strong>Dark figure of crime</strong> — Police-recorded data undercounts actual crime, systematically more so in deprived areas, likely compounding underprediction in those boroughs.</p>
-</li>
-<li><p><strong>Ecological fallacy</strong> — Ward-level aggregation means findings describe area-level patterns only and cannot be attributed to individuals.</p>
-</li>
-<li><p><strong>OSM coverage</strong> — POI data is uneven across London, with sparser coverage in outer boroughs potentially underrepresenting amenity density in those areas.</p>
-</li>
-<li><p><strong>Absence of controls</strong> — No temporal, demographic, or socioeconomic variables were included, limiting causal inference.</p>
-</li>
-<li><p><strong>Boundary mismatch</strong> — 25 wards in the 2024 ONS boundary revision had no matching MPS crime records, reducing the analytical sample from 704 to 679 wards.</p>
-</li>
-</ol>
+<h2 id="Limitations"><strong>Limitations</strong><a class="anchor-link" href="#Limitations">¶</a></h2><p><a href="#Table-of-contents">[ go back to the top ]</a></p>
+<p>Five limitations qualify these findings. First, police-recorded data systematically undercounts crime in deprived areas, likely compounding model underprediction there. Second, ward-level aggregation means findings describe area-level patterns only and cannot be attributed to individuals. Third, OSM coverage is uneven across London, potentially underrepresenting amenity density in outer boroughs. Fourth, the absence of temporal, demographic, and socioeconomic controls limits causal inference. Fifth, 25 wards in the 2024 ONS boundary revision had no matching MPS crime records, reducing the analytical sample from 704 to 679 wards. Despite these constraints, the consistency between CV and test performance suggests the core findings are robust to sampling variation.</p>
 </div>
 </div>
 </div>
@@ -12011,8 +12016,8 @@ Type B — Property
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>This study demonstrates that open-source POI data alone can predict ward-level crime density with moderate to strong accuracy, without recourse to demographic or socioeconomic variables. The key finding is that amenity type matters as much as amenity density. Convenience stores and fast food are the primary generators of person and society crime; cafés dominate property crime prediction. Most strikingly, night-time economy venues — bars, pubs, and nightclubs — showed unexpectedly weak predictive power despite their prominence in criminological literature. This is not a null result: it suggests that the regulatory environment of licensed premises actively suppresses crime opportunity, and that sustained daytime footfall is a stronger generator of crime in London wards than night-time activity. This has direct policy implications — amenity density alone is an insufficient proxy for crime risk.</p>
-<p>Where the model fails systematically — underpredicting in deprived outer boroughs, overpredicting in affluent ones; socioeconomic factors appear to operate independently of physical land use. POI density captures the physical opportunity structure of crime; socioeconomic variables capture the social conditions that generate it. These frameworks are complementary, and future work combining both has the potential to provide a more complete account of crime determinants across London.</p>
+<p>This study demonstrates that open-source POI data alone can predict ward-level crime density with moderate to strong accuracy, without recourse to demographic or socioeconomic variables. The key finding is that amenity type matters as much as amenity density. Convenience stores and fast food are the primary generators of person and society crime; cafés dominate property crime prediction. Most strikingly, night-time economy venues — bars, pubs, and nightclubs — showed unexpectedly weak predictive power despite their prominence in criminological literature. This is not a null result: it suggests that the regulatory environment of licensed premises actively suppresses crime opportunity, and that sustained daytime footfall is a stronger generator of crime in London wards than night-time activity. These findings have direct practical applications — the model could be used to identify which wards are most vulnerable to specific crime types based on their amenity profile, enabling more targeted crime prevention and resource allocation without requiring sensitive demographic data.</p>
+<p>The spatial residuals reveal where this account is incomplete. Systematic underprediction in deprived outer boroughs and overprediction in affluent ones suggests that socioeconomic factors operate independently of physical land use. POI density captures the physical opportunity structure of crime; socioeconomic variables capture the social conditions that generate it. These frameworks are complementary, and future work combining both has the potential to provide a more complete and actionable account of crime determinants across London.</p>
 </div>
 </div>
 </div>
@@ -12070,6 +12075,17 @@ Type B — Property
 <p>Malleson, N. and Andresen, M.A. (2016) 'Exploring the impact of ambient population measures on London crime hotspots', <em>Journal of Criminal Justice</em>, 46, pp. 52–63.</p>
 <p>ONS Open Geography Portal (2024) <em>Ward boundary polygons</em>. Available at: geoportal.statistics.gov.uk (Accessed: April 2025).</p>
 <p>Zhou, Y., Wang, F. and Zhou, S. (2023) 'The spatial patterns of the crime rate in London and its socio-economic influence factors', <em>Social Sciences</em>, 12(6), p. 340.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>CHECK THEESE!!!!!</p>
 </div>
 </div>
 </div>
