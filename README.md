@@ -1,4 +1,3 @@
-```markdown
 # Points of Interest as Crime Generators
 ## A Supervised Regression Analysis of London Ward-Level Crime Density
 
